@@ -1,0 +1,150 @@
+---
+
+  transfer_fuction:
+    wpb:
+      scale_power:0.166666
+      alpha:0.001
+    cmb:
+      scale_power:0.166666
+      alpha:0.001
+    gbm:
+      scale_power:0.166666
+      alpha:0.001
+  top_activity:
+    wpb:
+      percentile_threshold: 0.7
+      count_threshold: 5
+    cmb:
+      percentile_threshold: 0.7
+      count_threshold: 5
+    gbm:
+      percentile_threshold: 0.7
+      count_threshold: 5
+  output_rules:
+    wpb:
+      aml:
+        go_live_month_rules: go_live_month_rules_global
+        post_go_live_month_rules: post_go_live_months_rules_global
+        btl_rules:
+          - all_range_btl
+          - just_btl
+          - gb_ciiom_btl
+        static_threshold: 985
+        scc_hrtc_hram_threshold_factor: 0.95
+        ciiom_static_threshold: 965
+        max_lookback_month: 6
+        btl_wot_decile_num: 16
+        ciiom_btl_sample_pool_size: 4000
+        ciiom_btl_sample_size: 7
+        jbtl_lower_bnd: 946.07
+        jbtl_higher_bnd: 985
+        jbtl_size: 120
+        emp_threshold: 300
+        score_scale_factor: 0.5
+        nta_cutoff: 1
+        go_live_month:
+        first_batch_target_month: '2021-10'
+
+      cmb:
+        aml:
+          go_live_month_rules: go_live_month_rules_global
+          post_go_live_month_rules: post_go_live_months_rules_global
+          btl_rules:
+            - all_range_btl
+            - just_btl
+            - gb_ciiom_btl
+          static_threshold: 940
+          scc_hrtc_hram_threshold_factor: 0.95
+          ciiom_static_threshold: 836
+          max_lookback_month: 6
+          btl_wot_decile_num: 16
+          ciiom_btl_sample_pool_size: 4000
+          ciiom_btl_sample_size: 7
+          jbtl_lower_bnd: 822.55
+          jbtl_higher_bnd: 940
+          jbtl_size: 25
+          emp_threshold: 500
+          score_scale_factor: 0.5
+          nta_cutoff: 1
+          go_live_month:
+          first_batch_target_month: '2021-10'
+
+      aar:
+        aar_include_rules:
+          - gt_aar_bl_aml_threshold
+          - aar_aml_investigated_in_last_12_months
+          - new_aar_activity_since_previous_case
+          - gt_aar_ciiom_threshold
+          - gt_aar_nfrb_threshold
+        aar_in_scope_rules:
+          - not_aar_aml_investigated_in_last_12_months
+          - new_aar_activity_since_previous_case
+        aar_static_threshold: 876
+        aar_lookback_month: 12
+        aar_ciiom_threshold: 775
+        aar_nrfb_threshold: 823
+
+    gbm:
+      aml:
+        go_live_month_rules: go_live_month_rules_global
+        post_go_live_month_rules: post_go_live_months_rules_global
+        btl_rules:
+          - all_range_btl_gbm
+        static_threshold: 890
+        scc_hrtc_hram_threshold_factor: 0.95
+        ciiom_static_threshold: 890
+        max_lookback_month: 6
+        btl_wot_decile_num: 11
+        emp_threshold: 500
+        score_scale_factor: 0.5
+        nta_cutoff: 1
+        go_live_month:
+        first_batch_target_month: '2023-02'
+
+  sampling:
+    wpb:
+      sample_rule:
+        random_sampling:
+          sample_size: 0
+    cmb:
+      sample_rule:
+        random_sampling:
+          sample_size: 0
+    gbm:
+      sample_rule:
+        random_sampling:
+          sample_size: 0
+
+  case_type:
+    wpb:
+      NTB_cutoff_range: 5
+      low_txn_cutoff_range: 0
+      low_txn_rank_percentage: 0.1
+      FCR_cutoff_range: 12
+    cmb:
+      NTB_cutoff_range: 5
+      low_txn_cutoff_range: 0
+      low_txn_rank_percentage: 0.1
+      FCR_cutoff_range: 12
+    gbm:
+      NTB_cutoff_range: 5
+      low_txn_cutoff_range: 0
+      low_txn_rank_percentage: 0.1
+      FCR_cutoff_range: 12
+
+  holdout:
+    wpb:
+      lookback_month: 12
+      sin_osc_period: 20
+      prop_time_over_threshold: -1.0
+      base_month: '2020-01'
+    cmb:
+      lookback_month: 12
+      sin_osc_period: 20
+      prop_time_over_threshold: -1.0
+      base_month: '2020-01'
+    gbm:
+      lookback_month: 12
+      sin_osc_period: 20
+      prop_time_over_threshold: -1.0
+      base_month: '2020-01'
