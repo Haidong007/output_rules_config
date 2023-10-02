@@ -1,13 +1,15 @@
+import os
+
 import streamlit as st
 import pandas as pd
 import yaml
-
+import sys
 option = st.selectbox(
     'Select Market or Country you want to config for output rules: ',
     ('UK', 'JE', "SG", 'HK hbap', "HK Hase")
 )
 
-with open("gb_config.yaml", 'r') as uploaded_config:
+with open(os.path.join(os.path.dirname(sys.argv[0]), "gb_config.yaml"), 'r') as uploaded_config:
     loaded_config = yaml.safe_load(uploaded_config)
 
 tab1, tab2, tab3 = st.tabs(["WPB", "CMB", "GBM"])
@@ -104,13 +106,13 @@ with tab2:
         cmb_jbtl_size = st.number_input('JBTL Size (cmb): ', value=120)
     with col4:
         st.subheader("Others")
-        cmb_nta_cutoff = st.number_input('New Top activity cutoff: ', value=1)
-        cmb_max_lookback_month = st.number_input('Lookback Month: ', value=6)
-        cmb_go_live_month = st.text_input('Go-Live Month: ', '2021-10')
-        cmb_first_batch_target_month = st.text_input('first batch target_month: ', '2021-10')
+        cmb_nta_cutoff = st.number_input('New Top activity cutoff (cmb): ', value=1)
+        cmb_max_lookback_month = st.number_input('Lookback Month (cmb): ', value=6)
+        cmb_go_live_month = st.text_input('Go-Live Month (cmb): ', '2021-10')
+        cmb_first_batch_target_month = st.text_input('first batch target_month (cmb): ', '2021-10')
     st.subheader("Output Rules Settings:")
     cmb_includes_rules = st.multiselect(
-        'Please select includes rules (wpb): ',
+        'Please select includes rules (cmb): ',
         ['gt_aml_threshold',
          'scc_customers',
          'gt_scc_threshold',
@@ -128,7 +130,7 @@ with tab2:
          'gt_hram_customers'])
 
     cmb_in_scope_rules = st.multiselect(
-        'Please select in Scope rules (wpb): ',
+        'Please select in Scope rules (cmb): ',
         ['not_investigated',
          'score_gt_previous_case',
          'new_activity_since_previous_case',
@@ -141,7 +143,7 @@ with tab2:
     )
 
     cmb_btl_rules = st.multiselect(
-        'Please select BTL rules (wpb): ',
+        'Please select BTL rules (cmb): ',
         ['all_range_btl',
          'just_btl',
          'gb_ciiom_btl'
@@ -214,5 +216,5 @@ txt = st.text_area("Please review configuration file:", value="output_rules:"
                                                               "wpb:"
                                                               "aml:"
                                                               "")
-st.button("export conifg", type="primary")
-st.download_button("Export configuration:", loaded_config,"gb_exported_config.yaml")
+
+st.download_button("Export configuration:", yaml.dump(loaded_config,allow_unicode=True),"gb_exported_config.yaml")
