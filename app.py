@@ -78,7 +78,7 @@ with tab2:
         aar_ciiom_threshold = st.number_input('AAR CIIOM threshold:', value=loaded_config['output_rules']['cmb']['aar']['aar_ciiom_threshold'])
         aar_nrfb_threshold = st.number_input('AAR nRFB Threshold: ', value=loaded_config['output_rules']['cmb']['aar']['aar_nrfb_threshold'])
     with col2:
-        st.subheader("TBL")
+        st.subheader("BTL")
         cmb_btl_wot_decile_num = st.number_input('BTL Decile Num (cmb):', value=loaded_config['output_rules']['cmb']['aml']['btl_wot_decile_num'])
         cmb_ciiom_btl_sample_pool_size = st.number_input('CIIOM BTL Pool (cmb): ', value=loaded_config['output_rules']['cmb']['aml']['ciiom_btl_sample_pool_size'])
         cmb_ciiom_btl_sample_size = st.number_input('CIIOM BTL Pool (cmb): ', value=loaded_config['output_rules']['cmb']['aml']['ciiom_btl_sample_size'])
