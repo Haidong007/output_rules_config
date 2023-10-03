@@ -4,12 +4,12 @@ import streamlit as st
 import pandas as pd
 import yaml
 import sys
-option = st.selectbox(
+market_option = st.selectbox(
     'Select Market or Country you want to config for output rules: ',
     ('GB', 'JE', "SG", 'HK_HSBC', "HK_HASE")
 )
 
-with open(os.path.join(os.path.dirname(sys.argv[0]), option.lower()+"_config.yaml"), 'r') as uploaded_config:
+with open(os.path.join(os.path.dirname(sys.argv[0]), market_option.lower()+"_config.yaml"), 'r') as uploaded_config:
     loaded_config = yaml.load(uploaded_config, Loader=yaml.FullLoader)
 
 tab1, tab2, tab3 = st.tabs(["WPB", "CMB", "GBM"])
@@ -203,4 +203,4 @@ st.write(css, unsafe_allow_html=True)
 
 
 
-st.download_button("Export configuration:", yaml.dump(loaded_config,allow_unicode=True),"gb_exported_config.yaml")
+st.download_button("Export configuration:", yaml.dump(loaded_config,allow_unicode=True), market_option.lower()+"_config.yaml")
