@@ -26,7 +26,7 @@ with tab1:
         score_scale_factor = st.number_input('Score Scale factor: ', value=loaded_config['output_rules']['wpb']['aml']['score_scale_factor'])
 
     with col2:
-        st.subheader("TBL")
+        st.subheader("BTL")
         btl_wot_decile_num = st.number_input('BTL Decile Num:', value=loaded_config['output_rules']['wpb']['aml']['btl_wot_decile_num'])
         ciiom_btl_sample_pool_size = st.number_input('CIIOM BTL Pool: ', value=loaded_config['output_rules']['wpb']['aml']['ciiom_btl_sample_pool_size'])
         ciiom_btl_sample_size = st.number_input('CIIOM BTL Pool: ', value=loaded_config['output_rules']['wpb']['aml']['ciiom_btl_sample_size'])
